@@ -1,31 +1,35 @@
+import React from "react";
+
 type NewComponentType = {
-    cars: CarsType[]
+    currentFilter: CurrenFilterType[],
+    onClickFilterHandler: Function
 }
 
-type CarsType = {
-    manufacturer: string,
-    model: string,
+type CurrenFilterType = {
+    banknots: string,
+    value: number,
+    number: string,
 }
 
-export const NewComponent = (props:NewComponentType) => {
+export const NewComponent = (props: NewComponentType) => {
     return (
-        <>
-            {props.cars.map((el, index) => {
+        <div>
+            <ul>
+                {props.currentFilter.map((el, index) => {
                     return (
-                        <table key={index}>
-                            <tbody>
-                                <tr>
-                                    <th>{el.manufacturer}</th>
-                                </tr>
-                                <tr>
-                                    <td>{el.model}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    )
-                })
-            }
-        </>
-
+                        <li key={index}>
+                            <span>{el.banknots} </span>
+                            <span>{el.value} </span>
+                            <span>{el.number}</span>
+                        </li>
+                    )})
+                }
+            </ul>
+            <div style={{marginLeft: '35px'}}>
+                <button onClick={() => props.onClickFilterHandler('all')}>all</button>
+                <button onClick={() => props.onClickFilterHandler('rubles')}>rubles</button>
+                <button onClick={() => props.onClickFilterHandler('dollars')}>dollars</button>
+            </div>
+        </div>
     )
 }
